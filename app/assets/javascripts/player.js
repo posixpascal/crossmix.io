@@ -21,8 +21,8 @@ const onAudioPlayerReady = (event) => {
 
 const startPlayer = () => {
     $("#video_loader").html("");
-    videoPlayer.play();
-    audioPlayer.play();
+    !detectmob() && videoPlayer.play();
+    !detectmob() && audioPlayer.play();
 };
 
 const initPlayer = () => {
