@@ -37,8 +37,8 @@ const initPlayer = () => {
     $("#audio").attr("data-plyr-embed-id", audio.provider.videoId);
 
     const defaultOptions = {
-        debug :true,
-        autoplay: true,
+        debug :false,
+        autoplay: !detectmob(),
         autopause: false,
         height: 300,
         width: 300,
