@@ -45,6 +45,13 @@
 .plyr__video-wrapper iframe {
     height: 300px !important;
 }
+.video-wrapper {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    height: 1px;
+    width: 1px;
+}
 .plyr__video-embed {
     padding-bottom: 0 !important;
     height: 300px !important;
