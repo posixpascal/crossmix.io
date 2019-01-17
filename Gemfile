@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.2'
+ruby '2.3.1'
 gem "kaminari"
 gem "active_model_serializers"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
