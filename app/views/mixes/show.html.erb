@@ -11,12 +11,12 @@
   </div>
 <% end %>
 <%= content_for :global_scope do %>
-  <% if  @mix.tracks.videos.first and  @mix.tracks.audios.first %>
-  <meta property="og:title" content="www.crossmix.io | Mix match and create overlays using YT videos"/>
-  <meta property="og:image" content="<%= @mix.tracks.videos.first.image_url %>">
-  <meta property="og:url" content="https://crossmix.io/">
-  <meta property="og:site_name" content="crossmix.io"/>
-  <meta property="og:description" content="#<%= @mix.id %> | <%= @mix.tracks.videos.first.title %> vs <%= @mix.tracks.audios.first.title %>  | www.crossmix.io"/>
+  <% if @mix.tracks.videos.first and @mix.tracks.audios.first %>
+    <meta property="og:title" content="www.crossmix.io | Mix match and create overlays using YT videos"/>
+    <meta property="og:image" content="<%= @mix.tracks.videos.first.image_url %>">
+    <meta property="og:url" content="https://crossmix.io/">
+    <meta property="og:site_name" content="crossmix.io"/>
+    <meta property="og:description" content="#<%= @mix.id %> | <%= @mix.tracks.videos.first.title %> vs <%= @mix.tracks.audios.first.title %>  | www.crossmix.io"/>
   <% end %>
   <script>
       window.MIX = {
@@ -39,20 +39,16 @@
 <%= content_for :margin do %>mt--200
 <% end %>
 <div class="p-sm">
-  <h2>#<%= @mix.id %> &mdash; <%= @mix.title.empty? ? "Untitled" : @mix.title %></h2>
+  <h3 class="text-center text-muted">
+    <i class="fa fa-eye"></i>        <%= @mix.mix_views_count %> &mdash; <%= @mix.title.empty? ? "Untitled" : @mix.title %></h3>
   <div class="row">
-    <div class="col-12 col-md-4 mb-5 mb-md-0">
-      <h4 class="text-center">
-        <i class="fa fa-eye"></i>        <%= @mix.mix_views_count %>
-      </h4>
-    </div>
-    <div class="col-12 col-md-4 mb-5 mb-md-0">
+    <div class="col-12 col-md-6 mb-5 mb-md-0">
       <div class="text-center">
         <img src="<%= @mix.tracks.videos.first.image_url %>"><br>
         <i class="fa fa-video-camera"></i> <%= truncate @mix.tracks.videos.first.title %><br>
       </div>
     </div>
-    <div class="col-12 col-md-4 mb-5 mb-md-0">
+    <div class="col-12 col-md-6 mb-5 mb-md-0">
       <% if @mix.tracks.audios.first %>
         <div class="text-center">
           <img src="<%= @mix.tracks.audios.first.image_url %>"><br>
