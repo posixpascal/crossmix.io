@@ -7,7 +7,7 @@ class YoutubeProvider extends Provider {
 
         const pattern = PATTERNS.youtube;
         const matches = url.match(pattern);
-
-        this.videoId = matches[1];
+        console.log(matches, url);
+        this.videoId = matches[7];
     }
 }

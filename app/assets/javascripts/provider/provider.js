@@ -1,5 +1,5 @@
 const PATTERNS = {
-    'youtube': /^https?:\/\/(?:www\.)?(youtube\.com|youtu\.be\/)(?:\/[^?]+\?v=|)([a-zA-Z0-9-_]+)/ig
+    'youtube': /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/
 };
 
 class Provider {

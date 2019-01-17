@@ -7,12 +7,16 @@ let audioPlayer;
 const onVideoPlayerReady = (event) => {
     console.log("ready");
     videoReady = true;
-    if (videoReady && audioReady){ startPlayer(); }
+    if (videoReady && audioReady) {
+        startPlayer();
+    }
 };
 
 const onAudioPlayerReady = (event) => {
     audioReady = true;
-    if (videoReady && audioReady){ startPlayer(); }
+    if (videoReady && audioReady) {
+        startPlayer();
+    }
 };
 
 const startPlayer = () => {
@@ -22,58 +26,77 @@ const startPlayer = () => {
 };
 
 const initPlayer = () => {
-    if (typeof Plyr === "undefined"){ setTimeout(() => { initPlayer(); }, 50); return; }
+    if (typeof Plyr === "undefined") {
+        setTimeout(() => {
+            initPlayer();
+        }, 50);
+        return;
+    }
 
     const mix = state.mix.getState();
 
     const video = mix.tracks.filter(track => track.type === VIDEO_TYPE)[0];
     const audio = mix.tracks.filter(track => track.type === AUDIO_TYPE)[0];
-    if (!audio || !video){ setTimeout(() => { initPlayer() }, 50); return; }
+    if (!audio || !video) {
+        setTimeout(() => {
+            initPlayer()
+        }, 50);
+        return;
+    }
 
-
-    $("#audio").html("");
-    $("#video_loader").html(LOADING_TEMPLATE);
-    $("#video").attr("data-plyr-embed-id", video.provider.videoId);
-    $("#audio").attr("data-plyr-embed-id", audio.provider.videoId);
-
-    const defaultOptions = {
-        debug :false,
-        autoplay: !detectmob(),
-        autopause: false,
-        height: 300,
-        width: 300,
-        loop: {
-            active: true
+    state.mix.subscribe(() => {
+        if (audioPlayer) {
+            audioPlayer.destroy();
+            audioPlayer = null;
         }
-    };
-    videoPlayer = new Plyr('#video', {
-        ...defaultOptions,
-        muted: true
+        if (videoPlayer) {
+            videoPlayer.destroy();
+            videoPlayer = null;
+        }
+
+        $("#audio").html("");
+        $("#video_loader").html(LOADING_TEMPLATE);
+        $("#video").attr("data-plyr-embed-id", video.provider.videoId);
+        $("#audio").attr("data-plyr-embed-id", audio.provider.videoId);
+
+        const defaultOptions = {
+            debug: false,
+            autoplay: !detectmob(),
+            autopause: false,
+            height: 300,
+            width: 300,
+            loop: {
+                active: true
+            }
+        };
+        videoPlayer = new Plyr('#video', {
+            ...defaultOptions,
+            muted: true
+        });
+
+        videoPlayer.on("pause", () => {
+            audioPlayer.pause();
+        });
+        videoPlayer.on("play", () => {
+            audioPlayer.play();
+        });
+
+        videoPlayer.on("ended", () => {
+            audioPlayer.currentTime = 0;
+            videoPlayer.currentTime = 0;
+            videoPlayer.play();
+        });
+
+        videoPlayer.on("seeked", () => {
+            audioPlayer.currentTime = videoPlayer.currentTime;
+        });
+        videoPlayer.on("ready", onVideoPlayerReady);
+
+
+        audioPlayer = new Plyr('#audio', {
+            ...defaultOptions,
+        });
+
+        audioPlayer.on("ready", onAudioPlayerReady);
     });
-
-    videoPlayer.on("pause", () => {
-        audioPlayer.pause();
-    });
-    videoPlayer.on("play", () => {
-        audioPlayer.play();
-    });
-
-    videoPlayer.on("ended", () => {
-        audioPlayer.currentTime = 0;
-        videoPlayer.currentTime = 0;
-        videoPlayer.play();
-    });
-
-    videoPlayer.on("seeked", () => {
-        audioPlayer.currentTime = videoPlayer.currentTime;
-    });
-    videoPlayer.on("ready", onVideoPlayerReady);
-
-
-
-    audioPlayer = new Plyr('#audio', {
-        ...defaultOptions,
-    });
-
-    audioPlayer.on("ready", onAudioPlayerReady);
 }

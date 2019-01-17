@@ -1,25 +1,3 @@
-const checkButtons = (input) => {
-    if (!input.length) {
-        return;
-    }
-    const $tracks = input.closest(".tracks");
-    const $button = $tracks.find("[data-add-track]");
-    const $input = $tracks.find(".input-group").last().find("input");
-    const lastLink = $input.val();
-    if (lastLink) {
-        $button.removeClass("disabled");
-        return;
-    }
-    $button.addClass("disabled");
-};
-
-const checkInput = (input) => {
-    const url = input.val();
-    let provider = Provider.for(url);
-    provider.update(input.parent());
-};
-
-
 const updateView = () => {
     $("[data-name='video-tracks']").html("");
     $("[data-name='audio-tracks']").html("");
@@ -54,7 +32,7 @@ const updateView = () => {
     }
 
     let updateTimer;
-    $("[data-input='url']").on("input", function () {
+    $("[data-input='url']").on("keyup", function () {
         const index = $(this).closest(".input-group").data("index");
         const $input = $(`#track-${index} input`);
         const type = $input.closest(".tracks").hasClass("tracks-video") ? "video" : "audio";
@@ -69,15 +47,17 @@ const updateView = () => {
                 index,
                 provider: Provider.for(url)
             });
-            const mix = state.mix.getState();
-            $.ajax({
-                url: "/mixes/" + mix.name + "?key=" + (window.location.hash.substr(1) || ""),
-                method: "PATCH",
-                data: { mix },
-                success: () => {
-                    console.log("saved");
-                }
-            })
+            setTimeout(() => {
+                const mix = state.mix.getState();
+                $.ajax({
+                    url: "/mixes/" + mix.name + "?key=" + (window.location.hash.substr(1) || ""),
+                    method: "PATCH",
+                    data: {mix},
+                    success: () => {
+                        console.log("saved");
+                    }
+                });
+            }, 100);
         }, 200);
     });
 }
