@@ -42,7 +42,9 @@
     animation: rotate-three 1s linear infinite;
     border-top: 3px solid #EFEFFA;
 }
-
+.plyr__video-wrapper iframe {
+    height: 300px;
+}
 @keyframes rotate-one {
     0% {
         transform: rotateX(35deg) rotateY(-45deg) rotateZ(0deg);
