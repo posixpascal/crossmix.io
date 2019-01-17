@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :mixes
   root to: "home#index"
 
-  get "/:key", to: "mixes#show"
+  get "/:id", to: "mixes#show"
 end

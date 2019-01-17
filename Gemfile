@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.3.1'
 gem "kaminari"
 gem "active_model_serializers"
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -70,3 +69,4 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
+gem 'yt', '~> 0.28.0'

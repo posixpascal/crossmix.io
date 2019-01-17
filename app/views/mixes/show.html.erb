@@ -11,6 +11,11 @@
   </div>
 <% end %>
 <%= content_for :global_scope do %>
+  <meta property="og:title" content="www.crossmix.io | Mix match and create overlays using YT videos"/>
+  <meta property="og:image" content="<%= @mix.tracks.videos.first.image_url %>">
+  <meta property="og:url" content="https://crossmix.io/">
+  <meta property="og:site_name" content="crossmix.io"/>
+  <meta property="og:description" content="#<%= @mix.id %> | <%= @mix.tracks.videos.first.title %> | www.crossmix.io"/>
   <script>
       window.MIX = {
           id: <%= @mix.id %>,
@@ -19,20 +24,40 @@
           private: <%= @mix.private ? 'true' : 'false' %>,
       };
 
-      <% if @mix.tracks.videos.first %>localStorage.setItem("video_value", '<%= escape_javascript @mix.tracks.videos.first.url %>');<% end %>
-      <% if @mix.tracks.audios.first %>localStorage.setItem("audio_value", '<%= escape_javascript @mix.tracks.audios.first.url %>');<% end %>
+      <% if @mix.tracks.videos.first %>localStorage.setItem("video_value", '<%= escape_javascript @mix.tracks.videos.first.url %>');
+      <% end %>
+      <% if @mix.tracks.audios.first %>localStorage.setItem("audio_value", '<%= escape_javascript @mix.tracks.audios.first.url %>');
+      <% end %>
 
-      document.addEventListener("DOMContentLoaded", function(){
+      document.addEventListener("DOMContentLoaded", function () {
           initMixPanel();
       });
   </script>
 <% end %>
-<%= content_for :margin do %>mt--200<% end %>
+<%= content_for :margin do %>mt--200
+<% end %>
 <div class="p-sm">
-  <h2><%= @mix.title %></h2>
-  <div class="d-flex">
-    <div>
-      <i class="fa fa-eye"></i> <%= @mix.mix_views_count %>
+  <h2>#<%= @mix.id %> &mdash; <%= @mix.title.empty? ? "Untitled" : @mix.title %></h2>
+  <div class="row">
+    <div class="col-12 col-md-4 mb-5 mb-md-0">
+      <h4 class="text-center">
+        <i class="fa fa-eye"></i>        <%= @mix.mix_views_count %>
+      </h4>
+    </div>
+    <div class="col-12 col-md-4 mb-5 mb-md-0">
+      <div class="text-center">
+        <img src="<%= @mix.tracks.videos.first.image_url %>"><br>
+        <i class="fa fa-video-camera"></i> <%= truncate @mix.tracks.videos.first.title %><br>
+      </div>
+    </div>
+    <div class="col-12 col-md-4 mb-5 mb-md-0">
+      <% if @mix.tracks.audios.first %>
+        <div class="text-center">
+          <img src="<%= @mix.tracks.audios.first.image_url %>"><br>
+          <i class="fa fa-music"></i>
+          <%= truncate @mix.tracks.audios.first.title %><br>
+        </div>
+      <% end %>
     </div>
   </div>
 </div>

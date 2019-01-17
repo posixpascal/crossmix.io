@@ -45,11 +45,22 @@ class MixesController < ApplicationController
       tracks = params[:mix][:tracks]
       tracks.each do |track|
         track = track[1]
-        @mix.tracks.create({
+        mixtrack = @mix.tracks.new({
                                provider: track["provider"]["name"],
                                url: track["url"],
                                media: track["type"]
                            })
+
+        if track["provider"]["name"] == "youtube"
+          begin
+            video = Yt::Video.new id: track["provider"]["videoId"]
+            mixtrack.title = video.title
+            mixtrack.image_url = video.thumbnail_url
+            mixtrack.save
+          rescue
+          end
+        end
+        mixtrack.save
       end
       @mix.save
     end
