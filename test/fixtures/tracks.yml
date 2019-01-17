@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  mix_id: 1
+  trackable_type: MyString
+  trackable_id: 1
+  status: 1
+
+two:
+  mix_id: 1
+  trackable_type: MyString
+  trackable_id: 1
+  status: 1

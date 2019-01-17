@@ -1,0 +1,35 @@
+<div class="p-4">
+<%= form_for @mix do |f| %>
+  <div class="form-group">
+    <%= f.text_field :title, class: "form-control form-control-xl form-control-alternative", placeholder: "Title" %>
+  </div>
+  <%= render partial: "tracks", locals: { mix: @mix } %>
+  <div class="form-group">
+    <div class="d-flex">
+    <label data-toggle="tooltip" data-placement="top" title="Make this mix private?" class="custom-toggle">
+      <%= f.check_box :private, :"data-input" => "private"  %>
+      <span class="custom-toggle-slider rounded-circle"></span>
+    </label>
+      <label class="custom-toggle-label px-2">
+         <i class="fa fa-lock text-primary"></i>
+      </label>
+      <code>
+        <span class="public-url <%= 'invalid' if @mix.private %>">Public: https://crossmix.io/<%= @mix.name %></span><br>
+        <span class="private-url">Private: https://crossmix.io/<%= @mix.private_key %></span>
+      </code>
+    </div>
+  </div>
+<% end %>
+</div>
+
+<%= content_for :global_scope do %>
+<script>
+  window.location.hash = "<%= escape_javascript @key %>";
+  window.MIX = {
+      id: <%= @mix.id %>,
+      name: "<%= @mix.name %>",
+      private: <%= @mix.private %>
+  };
+  initMixPanel();
+</script>
+<% end %>

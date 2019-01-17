@@ -1,0 +1,25 @@
+/*
+ *= require argon/argon.min
+ *= require_tree .
+ *= require_self
+ */
+
+ .section-profile-cover {
+     height: 530px !important;
+ }
+
+code {
+    position: relative;
+    top: -7px;
+}
+
+.invalid {
+    text-decoration: line-through;
+}
+
+iframe {
+   width: 100%;
+}
+.brand-name {
+    font-family: 'Roboto Slab', serif;
+}
