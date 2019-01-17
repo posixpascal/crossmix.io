@@ -50,6 +50,7 @@
     top: 0px;
     left: 0px;
     height: 1px;
+    overflow:hidden;
     width: 1px;
 }
 .plyr__video-embed {
