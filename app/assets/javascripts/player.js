@@ -117,5 +117,7 @@ const initPlayer = () => {
         }
     });
 
-    state.mix.dispatch({type: "UPDATE" })
+    setTimeout(() => {
+        state.mix.dispatch({type: "UPDATE" })
+    }, 200);
 };

@@ -5,6 +5,7 @@
  */
 
 .loader {
+    z-index: 32;
     position: absolute;
     top: calc(50% - 32px);
     left: calc(50% - 32px);
