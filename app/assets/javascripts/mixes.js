@@ -69,7 +69,16 @@ const updateView = () => {
                 index,
                 provider: Provider.for(url)
             });
-        }, 300);
+            const mix = state.mix.getState();
+            $.ajax({
+                url: "/mixes/" + mix.name + "?key=" + (window.location.hash.substr(1) || ""),
+                method: "PATCH",
+                data: { mix },
+                success: () => {
+                    console.log("saved");
+                }
+            })
+        }, 200);
     });
 }
 
