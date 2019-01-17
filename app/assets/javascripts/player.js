@@ -67,7 +67,7 @@ const initPlayer = () => {
     videoPlayer.on("seeked", () => {
         audioPlayer.currentTime = videoPlayer.currentTime;
     });
-    videoPlayer.on("ready", onVideoPlayerReady);
+    videoPlayer.on("canplay", onVideoPlayerReady);
 
 
 
@@ -75,5 +75,5 @@ const initPlayer = () => {
         ...defaultOptions,
     });
 
-    audioPlayer.on("ready", onAudioPlayerReady);
+    audioPlayer.on("canplay", onAudioPlayerReady);
 }
