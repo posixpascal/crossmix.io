@@ -3,52 +3,59 @@
     <div id="video_loader">
 
     </div>
-    <div id="video">
+    <div id="video" data-plyr-provider="youtube">
 
     </div>
-    <div id="audio" class="d-none">
+    <div class="d-none">
+      <div id="audio" data-plyr-provider="youtube">
+      </div>
     </div>
   </div>
 <% end %>
 <div class="p-4">
-<%= form_for @mix do |f| %>
-  <div class="form-group">
-    <%= f.text_field :title, class: "form-control form-control-xl form-control-alternative", placeholder: "Title" %>
-  </div>
-  <%= render partial: "tracks", locals: { mix: @mix } %>
-  <div class="form-group">
-    <div class="d-flex align-items-center">
-    <label data-toggle="tooltip" data-placement="top" title="Make this mix private?" class="custom-toggle">
-      <%= f.check_box :private, :"data-input" => "private"  %>
-      <span class="custom-toggle-slider rounded-circle"></span>
-    </label>
-      <label class="custom-toggle-label px-2">
-         <i class="fa fa-lock text-primary"></i>
-      </label>
+  <%= form_for @mix do |f| %>
+    <div class="form-group">
+      <%= f.text_field :title, class: "form-control form-control-xl form-control-alternative", placeholder: "Title" %>
     </div>
-    <div class="mt-2">
-      <code><small><span class="public-url <%= 'invalid' if @mix.private %>">Public: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.name %></span></span><br>
-        <span class="private-url">Private: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.private_key %></span></span><br>
-        <% if @mix.key === session[:key] %>
-          <span class="edit-url">Edit: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.name %>#<%= @mix.key %></span></span>
-        <% end %>
-      </small></code>
+    <%= render partial: "tracks", locals: {mix: @mix} %>
+    <div class="form-group">
+      <div class="d-flex align-items-center">
+        <label data-toggle="tooltip" data-placement="top" title="Make this mix private?" class="custom-toggle">
+          <%= f.check_box :private, :"data-input" => "private" %>
+          <span class="custom-toggle-slider rounded-circle"></span>
+        </label>
+        <label class="custom-toggle-label px-2">
+           <i class="fa fa-lock text-primary"></i>
+        </label>
+      </div>
+      <div class="mt-2">
+        <code>
+          <small>
+            <span class="public-url <%= 'invalid' if @mix.private %>">Public: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.name %></span></span><br>
+            <span class="private-url">Private: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.private_key %></span></span><br>
+            <% if @mix.key === session[:key] %>
+              <span class="edit-url">Edit: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.name %>
+                #<%= @mix.key %></span></span>
+            <% end %>
+          </small>
+        </code>
+      </div>
     </div>
-    </div>
-<% end %>
+  <% end %>
 </div>
-<%= content_for :margin do %>mt--200<% end %>
+<%= content_for :margin do %>mt--200
+<% end %>
 <%= content_for :global_scope do %>
-<script>
-  window.location.hash = "<%= escape_javascript session[:key] %>";
-  window.MIX = {
-      id: <%= @mix.id %>,
-      name: "<%= @mix.name %>",
-      title: '<%= escape_javascript @mix.title %>',
-      private: <%= @mix.private ? 'true' : 'false' %>
-  };
-  document.addEventListener("DOMContentLoaded", function(){
-      initMixPanel();
-  });
-</script>
+  <script>
+      window.location.hash = "<%= escape_javascript session[:key] %>";
+      window.MIX = {
+          id: <%= @mix.id %>,
+          name: "<%= @mix.name %>",
+          title: '<%= escape_javascript @mix.title %>',
+          private: <%= @mix.private ? 'true' : 'false' %>
+      };
+      document.addEventListener("DOMContentLoaded", function () {
+          initMixPanel();
+      });
+  </script>
 <% end %>

@@ -47,19 +47,21 @@ const updateView = () => {
         $addAudioBtn.removeClass("disabled");
     }
 
-    if (mix.private){
+    if (mix.private) {
         $(".public-url").addClass("invalid");
     } else {
         $(".public-url").removeClass("invalid");
     }
 
     let updateTimer;
-    $("[data-input='url']").on("input", function() {
+    $("[data-input='url']").on("input", function () {
         const index = $(this).closest(".input-group").data("index");
         const $input = $(`#track-${index} input`);
         const type = $input.closest(".tracks").hasClass("tracks-video") ? "video" : "audio";
         const url = $input.val();
-        if (updateTimer){ clearTimeout(updateTimer); }
+        if (updateTimer) {
+            clearTimeout(updateTimer);
+        }
         updateTimer = setTimeout(() => {
             updateTrack({
                 type,
@@ -84,7 +86,7 @@ const addTrack = (type) => {
         }
     });
 
-    if (localStorage.getItem(type + "_value")){
+    if (localStorage.getItem(type + "_value")) {
         const url = localStorage.getItem(type + "_value")
         updateTrack({
             type,
@@ -105,35 +107,38 @@ const updateTrack = (payload) => {
 const addVideoTrack = () => addTrack(VIDEO_TYPE);
 const addAudioTrack = () => addTrack(AUDIO_TYPE);
 
-
+let inited = false;
 const initMixPanel = () => {
     $(() => {
         state.mix.subscribe(() => {
             updateView();
-            initPlayer();
+            if (!inited) {
+                inited = true;
+                initPlayer();
+            }
         });
 
 
         $("[data-add-track]").on("click", function () {
             const type = $(this).data("add-track");
-            (type == 'video') ? addVideoTrack() : addAudioTrack();
+            (type === 'video') ? addVideoTrack() : addAudioTrack();
         });
 
-        $("[name='mix[title]']").on("change", function(){
+        $("[name='mix[title]']").on("change", function () {
             state.mix.dispatch({
                 type: ACTION_SET_TITLE,
                 payload: $(this).val()
             })
         });
 
-        $("[data-input='private']").on("change", function(){
+        $("[data-input='private']").on("change", function () {
             state.mix.dispatch({
                 type: ACTION_SET_PRIVATE,
                 payload: $("[data-input='private']").is(":checked")
             })
-        })
+        });
 
         addVideoTrack();
         addAudioTrack();
     });
-}
+};
