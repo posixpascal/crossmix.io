@@ -44,13 +44,18 @@
   <h3 class="text-center mb-5 text-muted">
     <i class="fa fa-eye"></i>        <%= @mix.mix_views_count %> &mdash; <%= @mix.title.empty? ? "Untitled" : @mix.title %></h3>
   <div class="row">
-    <div class="col-12 col-md-6 mb-5 mb-md-0">
+    <div class="col-12 col-md-5 mb-5 mb-md-0">
       <div class="text-center">
         <img src="<%= @mix.tracks.videos.first.image_url %>"><br>
         <i class="fa fa-video-camera"></i> <%= truncate @mix.tracks.videos.first.title %><br>
       </div>
     </div>
-    <div class="col-12 col-md-6 mb-5 mb-md-0">
+    <div class="col-12 col-md-2 mb-5 mb-md-0">
+      <div class="text-center">
+        <h1><i class="fa fa-random"></i></h1>
+      </div>
+    </div>
+    <div class="col-12 col-md-5 mb-5 mb-md-0">
       <% if @mix.tracks.audios.first %>
         <div class="text-center">
           <img src="<%= @mix.tracks.audios.first.image_url %>"><br>

@@ -43,7 +43,11 @@
     border-top: 3px solid #EFEFFA;
 }
 .plyr__video-wrapper iframe {
-    height: 300px;
+    height: 300px !important;
+}
+.plyr__video-embed {
+    padding-bottom: 0 !important;
+    height: 300px !important;
 }
 @keyframes rotate-one {
     0% {
