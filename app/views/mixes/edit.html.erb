@@ -6,7 +6,7 @@
     <div id="video" data-plyr-provider="youtube">
 
     </div>
-    <div class="d-none">
+    <div class="audio-wrapper">
       <div id="audio" data-plyr-provider="youtube">
       </div>
     </div>
@@ -54,6 +54,18 @@
           title: '<%= escape_javascript @mix.title %>',
           private: <%= @mix.private ? 'true' : 'false' %>
       };
+
+      <% if @mix.tracks.videos.first %>
+        localStorage.setItem("video_value", '<%= escape_javascript @mix.tracks.videos.first.url %>');
+      <% else %>
+        localStorage.setItem("video_value", "");
+      <% end %>
+      <% if @mix.tracks.audios.first %>
+        localStorage.setItem("audio_value", '<%= escape_javascript @mix.tracks.audios.first.url %>');
+      <% else %>
+        localStorage.setItem("audio_value", "");
+      <% end %>
+
       document.addEventListener("DOMContentLoaded", function () {
           initMixPanel();
       });
