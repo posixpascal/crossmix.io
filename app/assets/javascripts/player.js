@@ -116,4 +116,6 @@ const initPlayer = () => {
             };
         }
     });
+
+    state.mix.dispatch({type: "UPDATE" })
 };
