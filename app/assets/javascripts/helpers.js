@@ -1,8 +1,8 @@
-function getVideoTracks(tracks) {
+function getVideoTracks(tracks){
     return tracks.filter(track => track.type === VIDEO_TYPE);
 }
 
-function getAudioTracks(tracks) {
+function getAudioTracks(tracks){
     return tracks.filter(track => track.type === AUDIO_TYPE);
 }
 
@@ -15,17 +15,22 @@ function selectElementContents(el) {
 }
 
 function detectmob() {
-    return (navigator.userAgent.match(/Android/i)
+    if( navigator.userAgent.match(/Android/i)
         || navigator.userAgent.match(/webOS/i)
         || navigator.userAgent.match(/iPhone/i)
         || navigator.userAgent.match(/iPad/i)
         || navigator.userAgent.match(/iPod/i)
         || navigator.userAgent.match(/BlackBerry/i)
         || navigator.userAgent.match(/Windows Phone/i)
-    );
+    ){
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
-function copy(el) {
+function copy(el){
     var sel = window.getSelection();
     document.execCommand('copy');
     sel.removeAllRanges();

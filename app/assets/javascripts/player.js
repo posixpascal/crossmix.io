@@ -45,15 +45,6 @@ const initPlayer = () => {
     }
 
     state.mix.subscribe(() => {
-        if (audioPlayer) {
-            audioPlayer.destroy();
-            audioPlayer = null;
-        }
-        if (videoPlayer) {
-            videoPlayer.destroy();
-            videoPlayer = null;
-        }
-
         $("#audio").html("");
         $("#video_loader").html(LOADING_TEMPLATE);
         $("#video").attr("data-plyr-embed-id", video.provider.videoId);
@@ -69,34 +60,60 @@ const initPlayer = () => {
                 active: true
             }
         };
-        videoPlayer = new Plyr('#video', {
-            ...defaultOptions,
-            muted: true
-        });
 
-        videoPlayer.on("pause", () => {
-            audioPlayer.pause();
-        });
-        videoPlayer.on("play", () => {
-            audioPlayer.play();
-        });
+        if (!videoPlayer){
+            videoPlayer = new Plyr('#video', {
+                ...defaultOptions,
+                muted: true
+            });
+            videoPlayer.on("pause", () => {
+                audioPlayer.pause();
+            });
+            videoPlayer.on("play", () => {
+                audioPlayer.play();
+            });
 
-        videoPlayer.on("ended", () => {
-            audioPlayer.currentTime = 0;
-            videoPlayer.currentTime = 0;
-            videoPlayer.play();
-        });
+            videoPlayer.on("ended", () => {
+                audioPlayer.currentTime = 0;
+                videoPlayer.currentTime = 0;
+                videoPlayer.play();
+            });
 
-        videoPlayer.on("seeked", () => {
-            audioPlayer.currentTime = videoPlayer.currentTime;
-        });
-        videoPlayer.on("ready", onVideoPlayerReady);
+            videoPlayer.on("seeked", () => {
+                audioPlayer.currentTime = videoPlayer.currentTime;
+            });
+            videoPlayer.on("ready", onVideoPlayerReady);
+
+        } else {
+            videoPlayer.source = {
+                type: 'video',
+                sources: [
+                    {
+                        src: video.provider.videoId,
+                        provider: 'youtube',
+                    },
+                ],
+            };
+        }
 
 
-        audioPlayer = new Plyr('#audio', {
-            ...defaultOptions,
-        });
 
-        audioPlayer.on("ready", onAudioPlayerReady);
+        if (!audioPlayer){
+            audioPlayer = new Plyr('#audio', {
+                ...defaultOptions,
+            });
+
+            audioPlayer.on("ready", onAudioPlayerReady);
+        } else {
+            audioPlayer.source = {
+                type: 'audio',
+                    sources: [
+                {
+                    src: audio.provider.videoId,
+                    provider: 'youtube',
+                },
+            ],
+            };
+        }
     });
-}
+};

@@ -32,7 +32,7 @@ const updateView = () => {
     }
 
     let updateTimer;
-    $("[data-input='url']").on("keyup", function () {
+    $("[data-input='url']").on("input", function () {
         const index = $(this).closest(".input-group").data("index");
         const $input = $(`#track-${index} input`);
         const type = $input.closest(".tracks").hasClass("tracks-video") ? "video" : "audio";
