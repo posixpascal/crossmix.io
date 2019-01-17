@@ -11,11 +11,13 @@
   </div>
 <% end %>
 <%= content_for :global_scope do %>
+  <% if  @mix.tracks.videos.first and  @mix.tracks.audios.first %>
   <meta property="og:title" content="www.crossmix.io | Mix match and create overlays using YT videos"/>
   <meta property="og:image" content="<%= @mix.tracks.videos.first.image_url %>">
   <meta property="og:url" content="https://crossmix.io/">
   <meta property="og:site_name" content="crossmix.io"/>
-  <meta property="og:description" content="#<%= @mix.id %> | <%= @mix.tracks.videos.first.title %> | www.crossmix.io"/>
+  <meta property="og:description" content="#<%= @mix.id %> | <%= @mix.tracks.videos.first.title %> vs <%= @mix.tracks.audios.first.title %>  | www.crossmix.io"/>
+  <% end %>
   <script>
       window.MIX = {
           id: <%= @mix.id %>,
