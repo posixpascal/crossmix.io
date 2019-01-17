@@ -3,9 +3,6 @@
  *= require_tree .
  *= require_self
  */
-code {
-  padding-left: 20px;
-}
 
 .loader {
     position: absolute;
@@ -99,4 +96,8 @@ iframe {
 }
 .brand-name {
     font-family: 'Roboto Slab', serif;
+}
+
+.navbar-collapse-header .logo-name {
+    color: #222;
 }

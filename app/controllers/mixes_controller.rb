@@ -3,7 +3,7 @@ class MixesController < ApplicationController
 
   def show
 
-    key = params[:key]
+    key = params[:id]
 
     if key.size == 16
       @mix = Mix.where(name: key, private: false).first
@@ -36,6 +36,7 @@ class MixesController < ApplicationController
   end
 
   def update
+    return render json: false if @mix.nil?
     if params[:key] === @mix.key
       @mix.update(mix_params)
 

@@ -16,8 +16,12 @@
           id: <%= @mix.id %>,
           name: "<%= @mix.name %>",
           title: '<%= escape_javascript @mix.title %>',
-          private: <%= @mix.private ? 'true' : 'false' %>
+          private: <%= @mix.private ? 'true' : 'false' %>,
       };
+
+      <% if @mix.tracks.videos.first %>localStorage.setItem("video_value", '<%= escape_javascript @mix.tracks.videos.first.url %>');<% end %>
+      <% if @mix.tracks.audios.first %>localStorage.setItem("audio_value", '<%= escape_javascript @mix.tracks.audios.first.url %>');<% end %>
+
       document.addEventListener("DOMContentLoaded", function(){
           initMixPanel();
       });

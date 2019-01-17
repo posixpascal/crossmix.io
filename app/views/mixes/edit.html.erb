@@ -25,15 +25,16 @@
       <label class="custom-toggle-label px-2">
          <i class="fa fa-lock text-primary"></i>
       </label>
-      <code><small>
-        <span class="public-url <%= 'invalid' if @mix.private %>">Public: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.name %></span></span><br>
+    </div>
+    <div class="mt-2">
+      <code><small><span class="public-url <%= 'invalid' if @mix.private %>">Public: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.name %></span></span><br>
         <span class="private-url">Private: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.private_key %></span></span><br>
         <% if @mix.key === session[:key] %>
           <span class="edit-url">Edit: <span data-toggle="tooltip" title="Click to copy" onclick="selectElementContents(this);copy(this)">https://crossmix.io/<%= @mix.name %>#<%= @mix.key %></span></span>
         <% end %>
       </small></code>
     </div>
-  </div>
+    </div>
 <% end %>
 </div>
 <%= content_for :margin do %>mt--200<% end %>
