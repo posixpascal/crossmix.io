@@ -1,0 +1,34 @@
+<%= content_for :content_header do %>
+  <div class="container pt-lg">
+    <div id="video_loader">
+
+    </div>
+    <div id="video">
+
+    </div>
+    <div id="audio" class="d-none">
+    </div>
+  </div>
+<% end %>
+<%= content_for :global_scope do %>
+  <script>
+      window.MIX = {
+          id: <%= @mix.id %>,
+          name: "<%= @mix.name %>",
+          title: '<%= escape_javascript @mix.title %>',
+          private: <%= @mix.private ? 'true' : 'false' %>
+      };
+      document.addEventListener("DOMContentLoaded", function(){
+          initMixPanel();
+      });
+  </script>
+<% end %>
+<%= content_for :margin do %>mt--200<% end %>
+<div class="p-sm">
+  <h2><%= @mix.title %></h2>
+  <div class="d-flex">
+    <div>
+      <i class="fa fa-eye"></i> <%= @mix.mix_views_count %>
+    </div>
+  </div>
+</div>

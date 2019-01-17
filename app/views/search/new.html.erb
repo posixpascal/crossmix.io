@@ -1,2 +1,5 @@
-<h1>Search#new</h1>
-<p>Find me in app/views/search/new.html.erb</p>
+<%= content_for :margin do %>mt--500<% end %>
+
+<form method="get" action="/search">
+  <input class="form-control-xl form-control" type="search" name="q" value="<%= params[:q] %>" placeholder="Search mixes...">
+</form>

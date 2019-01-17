@@ -39,44 +39,26 @@
         </div>
         <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
           <li class="nav-item">
-            <a href="<%= new_mix_path %>" class="nav-link" data-toggle="dropdown" href="#" role="button">
+            <a href="<%= new_mix_path %>" data-no-turbolink="true" class="nav-link" role="button">
               <i class="fa fa-random"></i>
               <span class="nav-link-inner--text">Create Mix</span>
             </a></li>
-          <li class="nav-item">
-            <a href="<%= search_new_path %>" class="nav-link" data-toggle="dropdown" href="#" role="button">
+          <!--<li class="nav-item">
+            <a href="<%= search_path %>" class="nav-link" role="button">
               <i class="fa fa-search"></i>
               <span class="nav-link-inner--text">Search</span>
             </a>
           </li>
           <li class="nav-item">
-            <a href="<%= trending_index_path %>" class="nav-link" data-toggle="dropdown" href="#" role="button">
+            <a href="<%= trending_index_path %>" class="nav-link" role="button">
               <i class="fa fa-star"></i>
               <span class="nav-link-inner--text">Trending</span>
             </a>
-          </li>
+          </li>-->
         </ul>
         <ul class="navbar-nav align-items-lg-center ml-lg-auto">
           <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://www.facebook.com/creativetim" target="_blank" data-toggle="tooltip" title="Like us on Facebook">
-              <i class="fa fa-facebook-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Facebook</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://www.instagram.com/creativetimofficial" target="_blank" data-toggle="tooltip" title="Follow us on Instagram">
-              <i class="fa fa-instagram"></i>
-              <span class="nav-link-inner--text d-lg-none">Instagram</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://twitter.com/creativetim" target="_blank" data-toggle="tooltip" title="Follow us on Twitter">
-              <i class="fa fa-twitter-square"></i>
-              <span class="nav-link-inner--text d-lg-none">Twitter</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link nav-link-icon" href="https://github.com/creativetimofficial/argon-design-system" target="_blank" data-toggle="tooltip" title="Star us on Github">
+            <a class="nav-link nav-link-icon" href="https://github.com/posixpascal/crossmix.io" target="_blank" data-toggle="tooltip" title="Star us on Github">
               <i class="fa fa-github"></i>
               <span class="nav-link-inner--text d-lg-none">Github</span>
             </a>
@@ -88,12 +70,7 @@
 </header>
 <main class="profile-page">
   <section class="section-profile-cover section-shaped my-0">
-    <div class="container pt-lg">
-      <div id="video">
-      </div>
-      <div id="audio">
-      </div>
-    </div>
+    <%= yield :content_header %>
     <!-- Circles background -->
     <div class="shape shape-style-1 shape-primary alpha-4">
       <span></span>
@@ -113,7 +90,7 @@
   </section>
   <section class="section">
     <div class="container">
-      <div class="card card-profile shadow mt--300">
+      <div class="card card-profile shadow <%= yield :margin %>">
           <%= yield %>
       </div>
     </div>

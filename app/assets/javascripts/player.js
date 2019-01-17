@@ -39,6 +39,7 @@ const onaudioPlayerReady = (event) => {
 };
 
 const startPlayer = () => {
+    $("#video_loader").html("");
     videoPlayer.playVideo();
     audioPlayer.playVideo();
 };
@@ -51,8 +52,13 @@ const initPlayer = () => {
     const video = mix.tracks.filter(track => track.type === VIDEO_TYPE)[0];
     const audio = mix.tracks.filter(track => track.type === AUDIO_TYPE)[0];
     if (!audio.url || !video.url){ return; }
+
+
+    $("#audio").html("");
+    $("#video_loader").html(LOADING_TEMPLATE);
+
     const defaultOptions = {
-        height: '200',
+        height: '300',
         width: '300',
         playerVars: {
             autoplay: 0,

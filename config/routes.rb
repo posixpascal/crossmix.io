@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   get 'home/index'
-  get 'search/new'
-  get 'search/show'
+  get "/search", to: "search#new"
   get 'trending/index'
   devise_for :users
 

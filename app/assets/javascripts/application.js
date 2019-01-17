@@ -1,6 +1,5 @@
 //= require rails-ujs
 //= require activestorage
-//= require turbolinks
 //= require jquery
 //= require redux/dist/redux.min
 //= require popper.js/dist/umd/popper.min

@@ -5,6 +5,7 @@ const PATTERNS = {
 class Provider {
     constructor(){
         this.icon = "link";
+        this.name = "generic";
     }
 
     update(input){

@@ -2,6 +2,7 @@ class YoutubeProvider extends Provider {
     constructor(url){
         super();
         this.icon = "youtube";
+        this.name = "youtube";
 
 
         const pattern = PATTERNS.youtube;

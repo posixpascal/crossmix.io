@@ -10,7 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_17_002114) do
+ActiveRecord::Schema.define(version: 2019_01_17_124122) do
+
+  create_table "mix_views", force: :cascade do |t|
+    t.integer "mix_id"
+    t.string "key"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "mixes", force: :cascade do |t|
     t.string "name"
@@ -22,6 +29,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_002114) do
     t.datetime "updated_at", null: false
     t.string "key"
     t.string "private_key"
+    t.integer "mix_views_count"
   end
 
   create_table "tracks", force: :cascade do |t|
@@ -31,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_01_17_002114) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "media"
   end
 
   create_table "users", force: :cascade do |t|

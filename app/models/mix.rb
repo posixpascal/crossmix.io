@@ -1,6 +1,7 @@
 class Mix < ApplicationRecord
   belongs_to :user, optional: true
   has_many :tracks
+  has_many :mix_views
 
   after_initialize :set_name, :if => :new_record?
   after_initialize :set_key, :if => :new_record?
