@@ -4,6 +4,9 @@
  *= require_self
  */
 
+.plyr__progress input[type='range'] {
+    width: calc(80% + 14px) !important;
+}
 .loader {
     z-index: 32;
     position: absolute;

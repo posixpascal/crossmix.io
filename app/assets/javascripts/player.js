@@ -37,7 +37,7 @@ const initPlayer = () => {
 
     const video = mix.tracks.filter(track => track.type === VIDEO_TYPE)[0];
     const audio = mix.tracks.filter(track => track.type === AUDIO_TYPE)[0];
-    if (!audio || !video) {
+    if (!audio || !video || !audio.url || !video.url) {
         setTimeout(() => {
             initPlayer()
         }, 50);
@@ -45,7 +45,6 @@ const initPlayer = () => {
     }
 
     state.mix.subscribe(() => {
-        $("#audio").html("");
         $("#video_loader").html(LOADING_TEMPLATE);
         $("#video").attr("data-plyr-embed-id", video.provider.videoId);
         $("#audio").attr("data-plyr-embed-id", audio.provider.videoId);
@@ -56,12 +55,13 @@ const initPlayer = () => {
             autopause: false,
             height: 300,
             width: 300,
+            controls: ['play', 'progress', 'current-time', 'full-screen'],
             loop: {
                 active: true
             }
         };
 
-        if (!videoPlayer){
+        if (!videoPlayer) {
             videoPlayer = new Plyr('#video', {
                 ...defaultOptions,
                 muted: true
@@ -97,8 +97,7 @@ const initPlayer = () => {
         }
 
 
-
-        if (!audioPlayer){
+        if (!audioPlayer) {
             audioPlayer = new Plyr('#audio', {
                 ...defaultOptions,
             });
@@ -107,17 +106,17 @@ const initPlayer = () => {
         } else {
             audioPlayer.source = {
                 type: 'audio',
-                    sources: [
-                {
-                    src: audio.provider.videoId,
-                    provider: 'youtube',
-                },
-            ],
+                sources: [
+                    {
+                        src: audio.provider.videoId,
+                        provider: 'youtube',
+                    },
+                ],
             };
         }
     });
 
     setTimeout(() => {
-        state.mix.dispatch({type: "UPDATE" })
+        state.mix.dispatch({type: "UPDATE"})
     }, 200);
 };
