@@ -58,6 +58,8 @@ group :development do
   gem "binding_of_caller"
 end
 
+gem "sidekiq"
+gem "sidekiq-status"
 group :test do
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '>= 2.15'
