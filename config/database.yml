@@ -21,7 +21,7 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: mysql
+  adapter: mysql2
   username: <%= ENV["DATABASE_USER"] %>
   password: <%= ENV["DATABASE_PASSWD"] %>
   host: localhost
