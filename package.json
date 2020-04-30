@@ -2,7 +2,7 @@
   "name": "crossmix",
   "private": true,
   "dependencies": {
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "plyr": "^3.4.8",
     "popper.js": "^1.14.6",
     "redux": "^4.0.1"
